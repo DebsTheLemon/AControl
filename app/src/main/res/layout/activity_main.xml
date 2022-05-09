@@ -40,15 +40,29 @@
         android:id="@+id/CurrentTempNumber"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:text="24"
+        android:text="26"
         android:textColor="#FFFFFF"
         android:textSize="120sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.199" />
+
+    <TextView
+        android:id="@+id/Celsius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="°C"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275" />
 
     <ImageView
         android:id="@+id/TempMinusBtn"
@@ -83,16 +97,16 @@
         style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current Temperature: "
+        android:text="Current Temperature: 24"
         android:textColor="#FFFFFF"
         android:textSize="27sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/PowerBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.256"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.126" />
 
     <TextView
         android:id="@+id/txtCurrentMode"

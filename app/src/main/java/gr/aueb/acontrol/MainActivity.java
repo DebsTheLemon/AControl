@@ -29,7 +29,7 @@ import android.widget.ImageView;
 public class MainActivity extends Activity {
 
     private AppBarConfiguration appBarConfiguration;
-    int temp = 24;
+    int temp = 26;
     CompoundButton previousCheckedCompoundButton;
     ImageView mIvToggle;
 
