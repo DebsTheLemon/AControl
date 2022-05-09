@@ -3,8 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/custom_btn_radio.xml" value="0.157" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_auto_mode.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_dry_mode.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_fan_more.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_heat_mode.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_mode_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_pressed_button.xml" value="0.149" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_pressed_minus_button.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_pressed_plus_button.xml" value="0.149" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_radio_mode_menu.xml" value="0.131" />
         <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/drawable/selector_toggle_button.xml" value="0.211" />
-        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Debs/AndroidStudioProjects/AControl/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
   </component>
