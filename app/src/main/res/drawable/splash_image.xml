@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Add the following code
+        add the drawable color to white-->
+    <!--Add the logo that you want to display and its gravity to centre-->
+    <item android:drawable="@drawable/ic_splash_screen"  android:gravity="center"/>
+</layer-list>

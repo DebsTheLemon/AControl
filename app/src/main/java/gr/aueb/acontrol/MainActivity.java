@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_AControl);
         setContentView(R.layout.activity_main);
 
         mIvToggle = (ImageView) findViewById(R.id.PowerBtn);
