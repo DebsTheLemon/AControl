@@ -224,4 +224,43 @@
         </LinearLayout>
     </RadioGroup>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/TxtCurrentTemp"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/More"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#1f1f1f"
+            android:layout_weight="1"
+            android:src="@drawable/more_button"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="707dp" />
+
+        <ImageButton
+            android:id="@+id/Home"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#1f1f1f"
+            android:layout_weight="1"
+            android:src="@drawable/home_button" />
+
+        <ImageButton
+            android:id="@+id/Timer"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#1f1f1f"
+            android:layout_weight="1"
+            android:src="@drawable/timer_button" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >
