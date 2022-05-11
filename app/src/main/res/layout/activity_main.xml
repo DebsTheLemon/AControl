@@ -11,6 +11,19 @@
     <!--Updated Power Button-->
 
     <ImageView
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/icon_indicator"
+        app:layout_constraintBottom_toTopOf="@+id/PowerBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
+
+    <ImageView
         android:id="@+id/PowerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +34,35 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.439" />
+        app:layout_constraintVertical_bias="0.415" />
+
+    <TextView
+        android:id="@+id/CurrentTempNumber"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:text="26"
+        android:textColor="#FFFFFF"
+        android:textSize="120sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.199" />
+
+    <TextView
+        android:id="@+id/Celsius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="°C"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.763"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.275" />
 
     <ImageView
         android:id="@+id/TempMinusBtn"
@@ -35,7 +76,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <ImageView
         android:id="@+id/TempPlusBtn"
@@ -49,49 +90,57 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/PowerBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.425" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/TxtCurrentTemp"
         style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current Temperature:"
+        android:text="Current Temperature: 24"
         android:textColor="#FFFFFF"
         android:textSize="27sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/PowerBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintVertical_bias="0.126" />
 
     <TextView
-        android:id="@+id/CurrentTempNumber"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:textColor="#FFFFFF"
-        android:text="24"
-        android:textSize="120sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.206" />
-
-    <ImageView
-        android:id="@+id/indicator"
+        android:id="@+id/txtCurrentMode"
+        style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/btn_indicator"
-        app:layout_constraintBottom_toTopOf="@+id/PowerBtn"
+        android:layout_marginTop="344dp"
+        android:text="Current Mode: "
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/modeMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.967" />
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/CurrentModeVal"
+        style="@style/Widget.AppCompat.TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="344dp"
+        android:text="AUTO"
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"
+        android:textStyle="normal|bold"
+        app:layout_constraintBottom_toTopOf="@+id/modeMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/txtCurrentMode"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <RadioGroup
         android:id="@+id/modeMenu"
@@ -121,6 +170,7 @@
                     android:id="@+id/Cool"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="modeCool"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:button="@drawable/selector_cool_mode" />
@@ -129,6 +179,7 @@
                     android:id="@+id/Fan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="modeFan"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:button="@drawable/selector_fan_mode" />
@@ -137,6 +188,7 @@
                     android:id="@+id/Dry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="modeDry"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:button="@drawable/selector_dry_mode" />
@@ -145,6 +197,7 @@
                     android:id="@+id/Heat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="modeHeat"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:button="@drawable/selector_heat_mode" />
@@ -161,6 +214,7 @@
                     android:id="@+id/Auto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="modeAuto"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:button="@drawable/selector_auto_mode"
@@ -170,4 +224,44 @@
         </LinearLayout>
     </RadioGroup>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/TxtCurrentTemp"
+        app:layout_constraintVertical_bias="1.0">
+
+        <ImageButton
+            android:id="@+id/More"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#1f1f1f"
+            android:layout_weight="1"
+            android:src="@drawable/btn_more"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="707dp" />
+
+        <ImageButton
+            android:id="@+id/Home"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#1f1f1f"
+            android:layout_weight="1"
+            android:src="@drawable/btn_home" />
+
+        <ImageButton
+            android:id="@+id/Timer"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="#1f1f1f"
+            android:layout_weight="1"
+            android:src="@drawable/btn_timer" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >

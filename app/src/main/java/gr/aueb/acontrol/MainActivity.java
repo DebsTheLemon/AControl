@@ -1,6 +1,7 @@
 package gr.aueb.acontrol;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -14,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -28,8 +30,7 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
-    private AppBarConfiguration appBarConfiguration;
-    int temp = 24;
+    int temp = 26;
     CompoundButton previousCheckedCompoundButton;
     ImageView mIvToggle;
 
@@ -60,6 +61,18 @@ public class MainActivity extends Activity {
         dry.setOnCheckedChangeListener(onRadioButtonCheckedListener);
         heat.setOnCheckedChangeListener(onRadioButtonCheckedListener);
         auto.setOnCheckedChangeListener(onRadioButtonCheckedListener);
+
+        ImageButton moreBtn = (ImageButton) findViewById(R.id.More);
+
+        moreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getApplicationContext(),MoreActivity.class);
+                startActivity(i);
+
+            }
+        });
     }
 
     CompoundButton.OnCheckedChangeListener onRadioButtonCheckedListener = new CompoundButton.OnCheckedChangeListener() {
@@ -75,23 +88,43 @@ public class MainActivity extends Activity {
         }
     };
 
+    public void modeCool(View view){
+        displayMode("COOL");
+    }
+    public void modeFan(View view){
+        displayMode("FAN");
+    }
+    public void modeDry(View view){
+        displayMode("DRY");
+    }
+    public void modeHeat(View view){
+        displayMode("HEAT");
+    }
+    public void modeAuto(View view){
+        displayMode("AUTO");
+    }
+
     public void increaseInteger(View view) {
         if (temp < 32) {
             temp = temp + 1;
         }
-        display(temp);
+        displayTemp(temp);
     }
 
     public void decreaseInteger(View view) {
         if (temp > 16) {
             temp = temp - 1;
         }
-        display(temp);
+        displayTemp(temp);
     }
 
-    private void display(int temp) {
-        TextView displayInteger = (TextView) findViewById(
-                R.id.CurrentTempNumber);
+    private void displayTemp(int temp) {
+        TextView displayInteger = (TextView) findViewById (R.id.CurrentTempNumber);
         displayInteger.setText("" + temp);
+    }
+
+    private void displayMode(String mode) {
+        TextView Mode = (TextView) findViewById(R.id.CurrentModeVal);
+        Mode.setText("" + mode);
     }
 }
