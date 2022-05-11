@@ -1,6 +1,7 @@
 package gr.aueb.acontrol;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -14,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
@@ -28,7 +30,6 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
-    private AppBarConfiguration appBarConfiguration;
     int temp = 26;
     CompoundButton previousCheckedCompoundButton;
     ImageView mIvToggle;
@@ -59,6 +60,18 @@ public class MainActivity extends Activity {
         dry.setOnCheckedChangeListener(onRadioButtonCheckedListener);
         heat.setOnCheckedChangeListener(onRadioButtonCheckedListener);
         auto.setOnCheckedChangeListener(onRadioButtonCheckedListener);
+
+        ImageButton moreBtn = (ImageButton) findViewById(R.id.More);
+
+        moreBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getApplicationContext(),MoreActivity.class);
+                startActivity(i);
+
+            }
+        });
     }
 
     CompoundButton.OnCheckedChangeListener onRadioButtonCheckedListener = new CompoundButton.OnCheckedChangeListener() {
