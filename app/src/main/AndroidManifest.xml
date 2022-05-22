@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreen">
         <activity
+            android:name=".TimerActivity"
+            android:exported="false" />
+        <activity
             android:name=".MoreActivity"
             android:exported="false"
             android:label="@string/title_activity_more"

@@ -63,14 +63,20 @@ public class MainActivity extends Activity {
         auto.setOnCheckedChangeListener(onRadioButtonCheckedListener);
 
         ImageButton moreBtn = (ImageButton) findViewById(R.id.More);
+        ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
 
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent i = new Intent(getApplicationContext(),MoreActivity.class);
                 startActivity(i);
-
+            }
+        });
+        timerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),TimerActivity.class);
+                startActivity(i);
             }
         });
     }

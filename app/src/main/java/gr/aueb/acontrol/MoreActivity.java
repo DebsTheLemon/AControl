@@ -1,9 +1,11 @@
 package gr.aueb.acontrol;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -25,6 +27,24 @@ public class MoreActivity extends Activity {
 
         turbo.setOnCheckedChangeListener(onRadioButtonCheckedListener);
         economy.setOnCheckedChangeListener(onRadioButtonCheckedListener);
+
+        ImageButton homeBtn = (ImageButton) findViewById(R.id.Home);
+        ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
+
+        homeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(i);
+            }
+        });
+        timerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),TimerActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
