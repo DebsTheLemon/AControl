@@ -56,7 +56,7 @@
         style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current Temperature: 24"
+        android:text="Current Temperature: 24°C"
         android:textColor="#FFFFFF"
         android:textSize="27sp"
         android:textStyle="normal"
@@ -80,11 +80,37 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.415" />
 
+    <ImageView
+        android:id="@+id/infoMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:src="@drawable/btn_info"
+        app:layout_constraintBottom_toBottomOf="@+id/CurrentModeVal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.957" />
+
+    <ImageView
+        android:id="@+id/infoTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:src="@drawable/btn_info"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.084" />
+
     <TextView
         android:id="@+id/CurrentTempNumber"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:text="26"
+        android:text=""
         android:textColor="#FFFFFF"
         android:textSize="140sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -96,6 +122,20 @@
 
     <TextView
         android:id="@+id/Celsius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="°C"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.277" />
+
+    <TextView
+        android:id="@+id/celsius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="°C"
@@ -253,12 +293,13 @@
     </RadioGroup>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="bottom"
+        android:layout_margin="5dp"
         android:orientation="horizontal"
         android:weightSum="3"
-        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -270,8 +311,8 @@
             android:id="@+id/More"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:background="#1f1f1f"
             android:layout_weight="1"
+            android:background="#1f1f1f"
             android:src="@drawable/btn_more"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="707dp" />
@@ -280,16 +321,16 @@
             android:id="@+id/Home"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:background="#1f1f1f"
             android:layout_weight="1"
+            android:background="#1f1f1f"
             android:src="@drawable/btn_home" />
 
         <ImageButton
             android:id="@+id/Timer"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:background="#1f1f1f"
             android:layout_weight="1"
+            android:background="#1f1f1f"
             android:src="@drawable/btn_timer" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout >

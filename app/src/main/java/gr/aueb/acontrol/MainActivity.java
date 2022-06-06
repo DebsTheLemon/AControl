@@ -1,13 +1,17 @@
 package gr.aueb.acontrol;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -30,9 +34,10 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
-    int temp = 26;
+    static int temp = 26;
     CompoundButton previousCheckedCompoundButton;
-    ImageView mIvToggle;
+    ImageView power, infoTemp, infoMode;
+    RadioButton cool, fan, dry, heat, auto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +46,21 @@ public class MainActivity extends Activity {
         setTheme(R.style.Theme_AControl);
         setContentView(R.layout.activity_main);
 
-        mIvToggle = (ImageView) findViewById(R.id.PowerBtn);
-        mIvToggle.setOnClickListener(new View.OnClickListener() {
+        power = (ImageView) findViewById(R.id.PowerBtn);
+        power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mIvToggle.setActivated(!mIvToggle.isActivated());
+                power.setActivated(!power.isActivated());
+                if (power.isActivated()){
+                    toastMsg("AC is now ON.");
+                }else{
+                    toastMsg("AC is now OFF.");
+                }
             }
         });
 
-        RadioButton cool, fan, dry, heat, auto;
+        displayTemp(temp);
+
         cool = (RadioButton) findViewById(R.id.Cool);
         fan = (RadioButton) findViewById(R.id.Fan);
         dry = (RadioButton) findViewById(R.id.Dry);
@@ -65,20 +76,59 @@ public class MainActivity extends Activity {
         ImageButton moreBtn = (ImageButton) findViewById(R.id.More);
         ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
 
+        infoTemp = (ImageView) findViewById(R.id.infoTemp);
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),MoreActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
         });
+
+        infoMode = (ImageView) findViewById(R.id.infoMode);
         timerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),TimerActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
             }
         });
+
+        infoTemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               showInfoBox("Temperature Info", "Set your desired temperature through " +
+                       "the arrow buttons and turn the AC on and off with the power button.");
+            }
+        });
+
+        infoMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Modes Info", "Select your desired mode, the current mode " +
+                        "is being displayed above the buttons.");
+            }
+        });
+    }
+
+    public void toastMsg(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    private void showInfoBox(String title, String info){
+        AlertDialog infoBox = new AlertDialog.Builder(MainActivity.this)
+                .setTitle(title)
+                .setMessage(info)
+                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface infoBox, int i) {
+                        infoBox.dismiss();
+                    }
+                }).create();
+        infoBox.show();
     }
 
     CompoundButton.OnCheckedChangeListener onRadioButtonCheckedListener = new CompoundButton.OnCheckedChangeListener() {
