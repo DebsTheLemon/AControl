@@ -9,10 +9,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MoreActivity extends Activity {
     CompoundButton previousCheckedCompoundButton;
-
+    ImageView swingSwitch;
     int speed = 2;
 
     @Override
@@ -31,6 +32,19 @@ public class MoreActivity extends Activity {
         ImageButton homeBtn = (ImageButton) findViewById(R.id.Home);
         ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
 
+        swingSwitch = (ImageView) findViewById(R.id.SwingSwitch);
+        swingSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                swingSwitch.setActivated(!swingSwitch.isActivated());
+                if (swingSwitch.isActivated()){
+                    toastMsg("Swing is now ON.");
+                }else{
+                    toastMsg("Swing is now OFF.");
+                }
+            }
+        });
+
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +62,12 @@ public class MoreActivity extends Activity {
             }
         });
 
+    }
+
+
+    public void toastMsg(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     CompoundButton.OnCheckedChangeListener onRadioButtonCheckedListener = new CompoundButton.OnCheckedChangeListener() {

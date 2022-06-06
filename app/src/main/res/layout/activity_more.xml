@@ -8,7 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".MoreActivity">
 
-    <!--Updated Power Button-->
+    <ImageView
+        android:id="@+id/SwingSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:src="@drawable/selector_switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.096" />
 
     <RadioGroup
         android:id="@+id/turbineModeMenu"
@@ -119,15 +130,27 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/Fan"
         android:layout_width="165dp"
         android:layout_height="166dp"
-        android:src="@drawable/fan_icon"
+        android:src="@drawable/icon_fan"
         app:layout_constraintBottom_toTopOf="@+id/txtCurrentTurbineMode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.886" />
+
+    <ImageView
+        android:id="@+id/Swing"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:src="@drawable/icon_swing"
+        app:layout_constraintBottom_toTopOf="@+id/Fan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321" />
 
     <TextView
         android:id="@+id/TxtCurrentFanVal"
@@ -143,7 +166,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.663"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/Fan"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
@@ -156,7 +179,7 @@
         android:src="@drawable/selector_pressed_plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/Fan"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.569" />
 
@@ -169,7 +192,7 @@
         android:onClick="decreaseSpeed"
         android:src="@drawable/selector_pressed_minus_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/Fan"
         app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
