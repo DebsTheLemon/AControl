@@ -8,18 +8,23 @@
     android:layout_height="match_parent"
     tools:context=".MoreActivity">
 
-    <ImageView
-        android:id="@+id/SwingSwitch"
+    <TextView
+        android:id="@+id/txtCurrentTurbineMode2"
+        style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00FFFFFF"
-        android:src="@drawable/selector_switch"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="492dp"
+        android:text="Current Turbine Mode: "
+        android:textColor="#FFFFFF"
+        android:textSize="27sp"
+        android:textStyle="normal"
+        app:layout_constraintBottom_toTopOf="@+id/turbineModeMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintVertical_bias="0.38" />
+
 
     <RadioGroup
         android:id="@+id/turbineModeMenu"
@@ -69,7 +74,7 @@
         app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.38" />
 
     <TextView
         android:id="@+id/CurrentTurbineVal"
@@ -80,7 +85,7 @@
         android:textColor="#FFFFFF"
         android:textSize="27sp"
         android:textStyle="normal|bold"
-        app:layout_constraintBottom_toTopOf="@+id/turbineModeMenu"
+        app:layout_constraintBottom_toBottomOf="@+id/txtCurrentTurbineMode2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/txtCurrentTurbineMode"
@@ -104,13 +109,11 @@
 
         <ImageButton
             android:id="@+id/More"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#1f1f1f"
-            android:src="@drawable/btn_more"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="707dp" />
+            android:src="@drawable/btn_more" />
 
         <ImageButton
             android:id="@+id/Home"
@@ -131,26 +134,40 @@
 
     <ImageView
         android:id="@+id/Fan"
-        android:layout_width="165dp"
-        android:layout_height="166dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:src="@drawable/icon_fan"
         app:layout_constraintBottom_toTopOf="@+id/txtCurrentTurbineMode"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.886" />
+        app:layout_constraintVertical_bias="0.891" />
 
     <ImageView
         android:id="@+id/Swing"
-        android:layout_width="220dp"
-        android:layout_height="220dp"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:src="@drawable/icon_swing"
         app:layout_constraintBottom_toTopOf="@+id/Fan"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintHorizontal_bias="0.753"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintVertical_bias="0.583" />
+
+    <ImageView
+        android:id="@+id/SwingSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00FFFFFF"
+        android:src="@drawable/selector_switch"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137" />
 
     <TextView
         android:id="@+id/TxtCurrentFanVal"
@@ -164,7 +181,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/txtCurrentTurbineMode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.663"
+        app:layout_constraintHorizontal_bias="0.641"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/Fan"
         app:layout_constraintVertical_bias="0.0" />
@@ -179,9 +196,10 @@
         android:src="@drawable/selector_pressed_plus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/Fan"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.537" />
 
     <ImageView
         android:id="@+id/FanMinusBtn"
@@ -193,9 +211,9 @@
         android:src="@drawable/selector_pressed_minus_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Fan"
-        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.569" />
+        app:layout_constraintVertical_bias="0.537" />
 
 </androidx.constraintlayout.widget.ConstraintLayout >
