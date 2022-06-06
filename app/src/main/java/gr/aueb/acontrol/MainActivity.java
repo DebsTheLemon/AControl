@@ -30,6 +30,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 import android.widget.ImageView;
+import android.speech.tts.TextToSpeech;
+
+import java.util.Locale;
 
 
 public class MainActivity extends Activity {
@@ -38,6 +41,8 @@ public class MainActivity extends Activity {
     CompoundButton previousCheckedCompoundButton;
     ImageView power, infoTemp, infoMode;
     RadioButton cool, fan, dry, heat, auto;
+    TextToSpeech test;
+    String feedback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +51,29 @@ public class MainActivity extends Activity {
         setTheme(R.style.Theme_AControl);
         setContentView(R.layout.activity_main);
 
+        test = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    test.setLanguage(Locale.US);
+                }
+            }
+        });
+
         power = (ImageView) findViewById(R.id.PowerBtn);
         power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 power.setActivated(!power.isActivated());
                 if (power.isActivated()){
                     toastMsg("AC is now ON.");
+                    feedback = "AC is now ON.";
                 }else{
                     toastMsg("AC is now OFF.");
+                    feedback = "AC is now OFF.";
                 }
+                test.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
@@ -183,4 +201,5 @@ public class MainActivity extends Activity {
         TextView Mode = (TextView) findViewById(R.id.CurrentModeVal);
         Mode.setText("" + mode);
     }
+
 }
