@@ -64,7 +64,6 @@ public class MoreActivity extends Activity {
 
     }
 
-
     public void toastMsg(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
         toast.show();

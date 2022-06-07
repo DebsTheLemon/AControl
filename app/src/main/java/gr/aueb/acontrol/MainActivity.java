@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
     CompoundButton previousCheckedCompoundButton;
     ImageView power, infoTemp, infoMode;
     RadioButton cool, fan, dry, heat, auto;
-    TextToSpeech test;
+    TextToSpeech audio;
     String feedback;
 
     @Override
@@ -51,11 +51,11 @@ public class MainActivity extends Activity {
         setTheme(R.style.Theme_AControl);
         setContentView(R.layout.activity_main);
 
-        test = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+        audio = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-                    test.setLanguage(Locale.US);
+                    audio.setLanguage(Locale.US);
                 }
             }
         });
@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
                     toastMsg("AC is now OFF.");
                     feedback = "AC is now OFF.";
                 }
-                test.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
+                audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
