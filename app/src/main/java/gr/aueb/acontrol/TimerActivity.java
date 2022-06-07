@@ -2,25 +2,49 @@ package gr.aueb.acontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
+
+import java.util.Calendar;
 import java.util.Locale;
+
+import gr.aueb.acontrol.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends AppCompatActivity {
     ImageView StartSwitch, StopSwitch;
     TextToSpeech audio;
     String feedback;
 
+    private ActivityTimerBinding binding;
+    private MaterialTimePicker picker;
+    private Calendar calendar = Calendar.getInstance();
+    private AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timer);
+        binding = ActivityTimerBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+//        setContentView(R.layout.activity_timer);
+        createNotificationChannel();
+
 
         audio = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -31,15 +55,24 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        binding.StartTimeVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showTimePicker();
+            }
+        });
+
         StartSwitch = (ImageView) findViewById(R.id.StartSwitch);
-        StartSwitch.setOnClickListener(new View.OnClickListener() {
+        binding.StartSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 StartSwitch.setActivated(!StartSwitch.isActivated());
                 if (StartSwitch.isActivated()){
+                    setAlarm();
                     toastMsg("Start timer set.");
                     feedback ="Start timer enabled.";
                 }else{
+                    cancelAlarm();
                     toastMsg("Start timer unset.");
                     feedback = "Start timer disabled.";
                 }
@@ -87,5 +120,59 @@ public class TimerActivity extends AppCompatActivity {
     public void toastMsg(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    private void setAlarm() {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        Log.i("SET SET", "SET SET");
+    }
+
+    private void cancelAlarm() {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        if (alarmManager == null){
+            alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        }
+        alarmManager.cancel(pendingIntent);
+        Log.i("UNSET UNSET", "UNSET UNSET");
+    }
+
+    private void showTimePicker() {
+        picker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(12)
+                .setMinute(0)
+                .setTitleText("Set Timer")
+                .build();
+
+        picker.show(getSupportFragmentManager(), "alarm");
+
+        picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.StartTimeVal.setText(String.format("%02d", picker.getHour())+":"+String.format("%02d", picker.getMinute()));
+                calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
+                calendar.set(Calendar.MINUTE, picker.getMinute());
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.MILLISECOND, 0);
+            }
+        });
+    }
+
+    private void createNotificationChannel(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "AControl Timer";
+            String description = "Channel Alarm Manager";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel ("alarm", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 }
