@@ -6,29 +6,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.View;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 import android.widget.ImageView;
 import android.speech.tts.TextToSpeech;
@@ -41,10 +28,14 @@ public class MainActivity extends Activity {
 
     static int temp = 26;
     CompoundButton previousCheckedCompoundButton;
-    ImageView power, infoTemp, infoMode;
+
+    private static MainActivity instance;
+
+    ImageView infoTemp, infoMode;
     RadioButton cool, fan, dry, heat, auto;
     TextToSpeech audio;
     String feedback;
+    static ImageView power;
 
     //private TextView txvResult;
 
@@ -54,6 +45,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_AControl);
         setContentView(R.layout.activity_main);
+        instance = this;
+
         //txvResult = (TextView) findViewById(R.id.txvResult);
         audio = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -68,14 +61,11 @@ public class MainActivity extends Activity {
         power.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 power.setActivated(!power.isActivated());
                 if (power.isActivated()){
-                    toastMsg("AC is now ON.");
-                    feedback = "AC is now ON.";
+                    powerON();
                 }else{
-                    toastMsg("AC is now OFF.");
-                    feedback = "AC is now OFF.";
+                    powerOFF();
                 }
                 audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
             }
@@ -134,6 +124,26 @@ public class MainActivity extends Activity {
                         "is being displayed above the buttons.");
             }
         });
+    }
+
+    public static boolean getPowerState() {
+        return power.isActivated();
+    }
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
+
+    public void powerON() {
+        power.setActivated(true);
+        toastMsg("AC is now ON.");
+        feedback = "AC is now ON.";
+    }
+
+    public void powerOFF() {
+        power.setActivated(false);
+        toastMsg("AC is now OFF.");
+        feedback = "AC is now OFF.";
     }
 
     public void toastMsg(String message) {

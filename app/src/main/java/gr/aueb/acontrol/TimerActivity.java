@@ -27,14 +27,20 @@ import java.util.Locale;
 import gr.aueb.acontrol.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends AppCompatActivity {
-    ImageView StartSwitch, StopSwitch;
+
+    TextView StartVal, StopVal;
     TextToSpeech audio;
     String feedback;
 
+    static ImageView StartSwitch, StopSwitch;
+    static boolean StartSet;
+    static boolean StopSet;
+
     private ActivityTimerBinding binding;
     private MaterialTimePicker picker;
-    private Calendar calendar = Calendar.getInstance();
-    private AlarmManager alarmManager;
+    private Calendar startCalendar = Calendar.getInstance();
+    private Calendar stopCalendar = Calendar.getInstance();
+    private AlarmManager startAlarmManager, stopAlarmManager;
     private PendingIntent pendingIntent;
 
     @Override
@@ -55,10 +61,19 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
-        binding.StartTimeVal.setOnClickListener(new View.OnClickListener() {
+        StartVal = (TextView) binding.StartTimeVal;
+        StartVal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTimePicker();
+                showStartTimePicker();
+            }
+        });
+
+        StopVal = (TextView) binding.StopTimeVal;
+        StopVal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showStopTimePicker();
             }
         });
 
@@ -68,13 +83,16 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 StartSwitch.setActivated(!StartSwitch.isActivated());
                 if (StartSwitch.isActivated()){
-                    setAlarm();
+                    setStartAlarm();
                     toastMsg("Start timer set.");
                     feedback ="Start timer enabled.";
+                    StartSet = true;
+
                 }else{
-                    cancelAlarm();
+                    cancelStartAlarm();
                     toastMsg("Start timer unset.");
                     feedback = "Start timer disabled.";
+                    StartSet = false;
                 }
                 audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
             }
@@ -86,11 +104,15 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View view) {
                 StopSwitch.setActivated(!StopSwitch.isActivated());
                 if (StopSwitch.isActivated()){
+                    setStopAlarm();
                     toastMsg("Stop timer set.");
                     feedback ="Stop timer enabled.";
+                    StopSet = true;
                 }else{
+                    cancelStopAlarm();
                     toastMsg("Stop timer unset.");
                     feedback = "Stop timer disabled.";
+                    StopSet = false;
                 }
                 audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
             }
@@ -122,57 +144,100 @@ public class TimerActivity extends AppCompatActivity {
         toast.show();
     }
 
-    private void setAlarm() {
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    private void setStartAlarm() {
+        startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        startAlarmManager.set(AlarmManager.RTC_WAKEUP, startCalendar.getTimeInMillis(), pendingIntent);
         Log.i("SET SET", "SET SET");
     }
 
-    private void cancelAlarm() {
+    private void setStopAlarm() {
+        stopAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        if (alarmManager == null){
-            alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        }
-        alarmManager.cancel(pendingIntent);
-        Log.i("UNSET UNSET", "UNSET UNSET");
+        pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE);
+        stopAlarmManager.set(AlarmManager.RTC_WAKEUP, stopCalendar.getTimeInMillis(), pendingIntent);
+        Log.i("SET SET", "SET SET");
     }
 
-    private void showTimePicker() {
+    private void cancelStartAlarm() {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        if (startAlarmManager == null){
+            startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        }
+        startAlarmManager.cancel(pendingIntent);
+        Log.i("START", "UNSET");
+    }
+
+    private void cancelStopAlarm() {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE);
+        if (stopAlarmManager == null){
+            stopAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        }
+        stopAlarmManager.cancel(pendingIntent);
+        Log.i("STOP", "UNSET");
+    }
+
+
+    private void showStartTimePicker() {
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .setHour(12)
                 .setMinute(0)
-                .setTitleText("Set Timer")
+                .setTitleText("Set Start Timer")
                 .build();
 
-        picker.show(getSupportFragmentManager(), "alarm");
+        picker.show(getSupportFragmentManager(), "start");
 
         picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.StartTimeVal.setText(String.format("%02d", picker.getHour())+":"+String.format("%02d", picker.getMinute()));
-                calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
-                calendar.set(Calendar.MINUTE, picker.getMinute());
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
+                StartVal.setText(String.format("%02d", picker.getHour())+":"+String.format("%02d", picker.getMinute()));
+                startCalendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
+                startCalendar.set(Calendar.MINUTE, picker.getMinute());
+                startCalendar.set(Calendar.SECOND, 0);
+                startCalendar.set(Calendar.MILLISECOND, 0);
+            }
+        });
+    }
+
+    private void showStopTimePicker() {
+        picker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(12)
+                .setMinute(0)
+                .setTitleText("Set Stop Timer")
+                .build();
+
+        picker.show(getSupportFragmentManager(), "stop");
+
+        picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StopVal.setText(String.format("%02d", picker.getHour())+":"+String.format("%02d", picker.getMinute()));
+                stopCalendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
+                stopCalendar.set(Calendar.MINUTE, picker.getMinute());
+                stopCalendar.set(Calendar.SECOND, 0);
+                stopCalendar.set(Calendar.MILLISECOND, 0);
             }
         });
     }
 
     private void createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "AControl Timer";
-            String description = "Channel Alarm Manager";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel ("alarm", name, importance);
-            channel.setDescription(description);
+            NotificationChannel startChannel = new NotificationChannel ("start", "AControl Start Timer", NotificationManager.IMPORTANCE_HIGH);
+            startChannel.setDescription("Channel Alarm Manager");
 
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
+            NotificationManager startManager = getSystemService(NotificationManager.class);
+            startManager.createNotificationChannel(startChannel);
+
+            NotificationChannel stopChannel = new NotificationChannel ("stop", "AControl Stop Timer", NotificationManager.IMPORTANCE_HIGH);
+            startChannel.setDescription("Channel Alarm Manager");
+
+            NotificationManager stopManager = getSystemService(NotificationManager.class);
+            stopManager.createNotificationChannel(stopChannel);
         }
     }
 }

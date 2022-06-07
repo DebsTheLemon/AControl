@@ -309,7 +309,7 @@
 
         <ImageButton
             android:id="@+id/More"
-            android:layout_width="wrap_content"
+            android:layout_width="45dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#1f1f1f"
@@ -323,7 +323,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#1f1f1f"
-            android:src="@drawable/btn_home" />
+            android:src="@drawable/btn_home_pressed" />
 
         <ImageButton
             android:id="@+id/Timer"
@@ -338,12 +338,13 @@
         android:id="@+id/btnSpeak"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/btn_info"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/modeMenu"
+        android:background="#00FFFFFF"
         android:onClick="getSpeechInput"
-        app:layout_constraintVertical_bias="0.0" />
+        android:src="@drawable/btn_mic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.009" />
 </androidx.constraintlayout.widget.ConstraintLayout >
