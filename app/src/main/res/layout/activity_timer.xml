@@ -141,7 +141,7 @@
 
         <ImageButton
             android:id="@+id/More"
-            android:layout_width="wrap_content"
+            android:layout_width="45dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#1f1f1f"
@@ -163,7 +163,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#1f1f1f"
-            android:src="@drawable/btn_timer" />
+            android:src="@drawable/btn_timer_pressed" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

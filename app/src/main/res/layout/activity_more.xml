@@ -34,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.418" />
 
+
     <ImageView
         android:id="@+id/infoModes"
         android:layout_width="wrap_content"
@@ -45,7 +46,7 @@
         app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <TextView
         android:id="@+id/txtCurrentTurbineMode2"
@@ -59,11 +60,10 @@
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/turbineModeMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
-
+        app:layout_constraintVertical_bias="0.9" />
 
     <RadioGroup
         android:id="@+id/turbineModeMenu"
@@ -99,27 +99,11 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/txtCurrentTurbineMode"
-        style="@style/Widget.AppCompat.TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="492dp"
-        android:text="Current Turbine Mode: "
-        android:textColor="#FFFFFF"
-        android:textSize="27sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toTopOf="@+id/turbineModeMenu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.205"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
-
-    <TextView
         android:id="@+id/CurrentTurbineVal"
         style="@style/Widget.AppCompat.TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="ECO"
         android:textColor="#FFFFFF"
         android:textSize="27sp"
@@ -127,7 +111,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/txtCurrentTurbineMode2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/txtCurrentTurbineMode"
+        app:layout_constraintStart_toEndOf="@+id/txtCurrentTurbineMode2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -148,11 +132,11 @@
 
         <ImageButton
             android:id="@+id/More"
-            android:layout_width="60dp"
+            android:layout_width="45dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="#1f1f1f"
-            android:src="@drawable/btn_more" />
+            android:src="@drawable/btn_more_pressed" />
 
         <ImageButton
             android:id="@+id/Home"
@@ -176,12 +160,12 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:src="@drawable/icon_fan"
-        app:layout_constraintBottom_toTopOf="@+id/txtCurrentTurbineMode"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.891" />
+        app:layout_constraintVertical_bias="0.518" />
 
     <ImageView
         android:id="@+id/Swing"
@@ -218,12 +202,10 @@
         android:textColor="#FFFFFF"
         android:textSize="80sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtCurrentTurbineMode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.641"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Fan"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/Fan" />
 
     <ImageView
         android:id="@+id/FanPlusBtn"
