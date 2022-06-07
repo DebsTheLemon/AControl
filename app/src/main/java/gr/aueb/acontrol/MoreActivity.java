@@ -72,24 +72,23 @@ public class MoreActivity extends Activity {
         infoSwing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showInfoBox("Swing Info", "Set your desired temperature through " +
-                        "the arrow buttons and turn the AC on and off with the power button.");
+                showInfoBox("Swing Adjustment", "To adjust the air's direction press START, " +
+                        "when the flap has reached your desired angle, press STOP.");
             }
         });
 
         infoFan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showInfoBox("Fan Info", "Select your desired mode, the current mode " +
-                        "is being displayed above the buttons.");
+                showInfoBox("Fan Speed Controls", "Use the arrow buttons to adjust the fan Speed between 1-3.");
             }
         });
 
         infoModes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showInfoBox("Turbine Modes Info", "Select your desired mode, the current mode " +
-                        "is being displayed above the buttons.");
+                showInfoBox("Turbine Modes Info", "Select your desired turbine mode, " +
+                        "the current turbine mode is being displayed above the buttons.");
             }
         });
 
