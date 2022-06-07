@@ -95,6 +95,8 @@ public class MainActivity extends Activity {
         ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
 
         infoTemp = (ImageView) findViewById(R.id.infoTemp);
+        infoMode = (ImageView) findViewById(R.id.infoMode);
+
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +106,6 @@ public class MainActivity extends Activity {
             }
         });
 
-        infoMode = (ImageView) findViewById(R.id.infoMode);
         timerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

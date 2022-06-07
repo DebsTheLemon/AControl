@@ -1,6 +1,8 @@
 package gr.aueb.acontrol;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +15,7 @@ import android.widget.Toast;
 
 public class MoreActivity extends Activity {
     CompoundButton previousCheckedCompoundButton;
-    ImageView swingSwitch;
+    ImageView swingSwitch, infoSwing, infoFan, infoModes;
     int speed = 2;
 
     @Override
@@ -31,6 +33,10 @@ public class MoreActivity extends Activity {
 
         ImageButton homeBtn = (ImageButton) findViewById(R.id.Home);
         ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
+
+        infoSwing = (ImageView) findViewById(R.id.infoSwing);
+        infoFan = (ImageView) findViewById(R.id.infoFan);
+        infoModes = (ImageView) findViewById(R.id.infoModes);
 
         swingSwitch = (ImageView) findViewById(R.id.SwingSwitch);
         swingSwitch.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +59,41 @@ public class MoreActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        timerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),TimerActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(i);
+            }
+        });
+
+        infoSwing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Swing Info", "Set your desired temperature through " +
+                        "the arrow buttons and turn the AC on and off with the power button.");
+            }
+        });
+
+        infoFan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Fan Info", "Select your desired mode, the current mode " +
+                        "is being displayed above the buttons.");
+            }
+        });
+
+        infoModes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Turbine Modes Info", "Select your desired mode, the current mode " +
+                        "is being displayed above the buttons.");
+            }
+        });
+
+        infoModes = (ImageView) findViewById(R.id.infoModes);
         timerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +108,19 @@ public class MoreActivity extends Activity {
     public void toastMsg(String message) {
         Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    private void showInfoBox(String title, String info){
+        AlertDialog infoBox = new AlertDialog.Builder(MoreActivity.this)
+                .setTitle(title)
+                .setMessage(info)
+                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface infoBox, int i) {
+                        infoBox.dismiss();
+                    }
+                }).create();
+        infoBox.show();
     }
 
     CompoundButton.OnCheckedChangeListener onRadioButtonCheckedListener = new CompoundButton.OnCheckedChangeListener() {
