@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.View;
 
@@ -32,6 +33,7 @@ import android.widget.Toast;
 import android.widget.ImageView;
 import android.speech.tts.TextToSpeech;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -44,13 +46,15 @@ public class MainActivity extends Activity {
     TextToSpeech audio;
     String feedback;
 
+    //private TextView txvResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setTheme(R.style.Theme_AControl);
         setContentView(R.layout.activity_main);
-
+        //txvResult = (TextView) findViewById(R.id.txvResult);
         audio = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -203,4 +207,32 @@ public class MainActivity extends Activity {
         Mode.setText("" + mode);
     }
 
+
+    public void getSpeechInput(View view) {
+
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.ENGLISH);
+
+        if(intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, 10);
+        }else{
+            Toast.makeText(this, "Your device does not support speech input", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case 10:
+                if (resultCode == RESULT_OK && data != null){
+                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Log.i("Speech recognition: I heard", String.valueOf(result));
+                }
+
+                break;
+        }
+    }
 }
