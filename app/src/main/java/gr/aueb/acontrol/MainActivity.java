@@ -186,21 +186,11 @@ public class MainActivity extends Activity {
         }
     };
 
-    public void modeCool(View view){
-        displayMode("COOL");
-    }
-    public void modeFan(View view){
-        displayMode("FAN");
-    }
-    public void modeDry(View view){
-        displayMode("DRY");
-    }
-    public void modeHeat(View view){
-        displayMode("HEAT");
-    }
-    public void modeAuto(View view){
-        displayMode("AUTO");
-    }
+    public void modeCool(View view){ displayMode("COOL"); }
+    public void modeFan(View view){ displayMode("FAN"); }
+    public void modeDry(View view){ displayMode("DRY"); }
+    public void modeHeat(View view){ displayMode("HEAT"); }
+    public void modeAuto(View view){ displayMode("AUTO"); }
 
     public void increaseInteger(View view) {
         if (temp < 32) {
@@ -250,19 +240,49 @@ public class MainActivity extends Activity {
                     String result = String.valueOf(data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS).get(0));
                     String results[] = result.trim().split("\\s* \\s*");
                     Log.i("Speech recognition", "I heard you!");
-                    if (result.contains("assistance")){
+                    if (result.contains("assistance")) {
                         listCommands();
-                    }else if (result.contains("turn") && result.contains("on")){
+                    } else if (result.contains("turn") && result.contains("on")) {
                         powerON();
-                    }else if (result.contains("turn") && result.contains("off")){
+                    } else if (result.contains("turn") && result.contains("off")) {
                         powerOFF();
-                    }else if (result.contains("Celsius")){
-                        Log.i("Desired Temperature", String.valueOf(results[results.length-2]));
-                        temp = Integer.valueOf(results[results.length-2]);
-                        displayTemp(temp);
+                    } else if (result.contains("Celsius")) {
+                        Log.i("Desired Temperature", String.valueOf(results[results.length - 2]));
+                        temp = Integer.valueOf(results[results.length - 2]);
+                        if (temp <= 32 && temp >= 16) {
+                            displayTemp(temp);
+                            audio.speak("Temperature has been set to " + String.valueOf(temp) + " degrees Celsius.", TextToSpeech.QUEUE_FLUSH, null);
+                        } else if (temp > 32) {
+                            audio.speak("Maximum temperature is 32 degrees Celsius, please try again.", TextToSpeech.QUEUE_FLUSH, null);
+                        } else if (temp < 16) {
+                            audio.speak("Minimum temperature is 16 degrees Celsius, please try again.", TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                    } else if (result.contains("set") && result.contains("mode")) {
+                        String mode = String.valueOf(results[results.length - 1]);
+                        Log.i("Heard you say", mode);
+                        if (result.contains("cool")) {
+                            displayMode("COOL");
+                            Log.i("it's", "in");
+                        } else if (result.contains("vent")) {
+                            displayMode("FAN");
+                        } else if (result.contains("dry")) {
+                            displayMode("DRY");
+                        } else if (result.contains("heat") || result.contains("warm")) {
+                            displayMode("HEAT");
+                        } else if (result.contains("auto") || result.contains("automatic")) {
+                            displayMode("AUTO");
+                        } else {
+                            audio.speak("Available modes are: COOL, VENT, DRY, HEAT or AUTO. Please try again.", TextToSpeech.QUEUE_FLUSH, null);
+                        }
+                    } else if (result.contains("meow")) {
+                        audio.speak("Thank you for using our app. OwO", TextToSpeech.QUEUE_FLUSH, null);
+                    } else if (result.contains("joke")) {
+                        audio.speak("What’s the difference between a piano and a fish? You can tune a piano, but you can’t tuna fish. HAHA HAHA HAHA", TextToSpeech.QUEUE_FLUSH, null);
+                    }else{
+                        audio.speak("Sorry, please try again", TextToSpeech.QUEUE_FLUSH, null);
                     }
                 }
-                break;
+            break;
         }
     }
 
@@ -270,7 +290,7 @@ public class MainActivity extends Activity {
         String commands =   "Say 'TURN ON' to turn the AC ON."+
                             "Say 'TURN OFF' to turn the AC OFF. "+
                             "To set your desired temperature say the temperature value followed by the word Celsius."+
-                            "To change the mode say: 'mode', and the name of the mode you want, COOL, FAN, DRY, HEAT or AUTO";
+                            "To change the mode say: 'Set mode to', and the name of the mode you want, COOL, VENT, DRY, HEAT or AUTO";
 
         audio.speak(commands, TextToSpeech.QUEUE_FLUSH, null);
 
