@@ -67,7 +67,6 @@ public class MainActivity extends Activity {
                 }else{
                     powerOFF();
                 }
-                audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
 
@@ -138,12 +137,14 @@ public class MainActivity extends Activity {
         power.setActivated(true);
         toastMsg("AC is now ON.");
         feedback = "AC is now ON.";
+        audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     public void powerOFF() {
         power.setActivated(false);
         toastMsg("AC is now OFF.");
         feedback = "AC is now OFF.";
+        audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     public void toastMsg(String message) {
