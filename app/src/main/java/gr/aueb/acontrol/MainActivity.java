@@ -3,6 +3,7 @@ package gr.aueb.acontrol;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,10 +26,8 @@ import android.speech.tts.TextToSpeech;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
+import android.os.Vibrator;
 
 
 public class MainActivity extends Activity {
@@ -38,6 +37,8 @@ public class MainActivity extends Activity {
     CompoundButton previousCheckedCompoundButton;
 
     private static MainActivity instance;
+
+
 
     ImageView infoTemp, infoMode;
     RadioButton cool, fan, dry, heat, auto;
@@ -55,6 +56,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         instance = this;
 
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
         //txvResult = (TextView) findViewById(R.id.txvResult);
         audio = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -70,6 +73,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 power.setActivated(!power.isActivated());
+                v.vibrate(50);
                 if (power.isActivated()){
                     powerON();
                 }else{
@@ -101,6 +105,7 @@ public class MainActivity extends Activity {
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 Intent i = new Intent(getApplicationContext(),MoreActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
@@ -110,6 +115,7 @@ public class MainActivity extends Activity {
         timerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 Intent i = new Intent(getApplicationContext(),TimerActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
@@ -119,6 +125,7 @@ public class MainActivity extends Activity {
         infoTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                showInfoBox("Temperature Info", "Set your desired temperature through " +
                        "the arrow buttons and turn the Air Conditioner ON and OFF with the power button.");
             }
@@ -127,6 +134,7 @@ public class MainActivity extends Activity {
         infoMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 showInfoBox("Modes Info", "Select your desired mode, the current mode " +
                         "is being displayed above the mode buttons.");
             }
