@@ -144,15 +144,13 @@ public class MainActivity extends Activity {
     public void powerON() {
         power.setActivated(true);
         toastMsg("AC is now ON.");
-        feedback = "AC is now ON.";
-        audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
+        speaker("AC is now ON.");
     }
 
     public void powerOFF() {
         power.setActivated(false);
         toastMsg("AC is now OFF.");
-        feedback = "AC is now OFF.";
-        audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
+       speaker("AC is now OFF.");
     }
 
     public void toastMsg(String message) {
@@ -251,39 +249,47 @@ public class MainActivity extends Activity {
                         temp = Integer.valueOf(results[results.length - 2]);
                         if (temp <= 32 && temp >= 16) {
                             displayTemp(temp);
-                            audio.speak("Temperature has been set to " + String.valueOf(temp) + " degrees Celsius.", TextToSpeech.QUEUE_FLUSH, null);
+                            speaker("Temperature has been set to " + String.valueOf(temp) + " degrees Celsius.");
                         } else if (temp > 32) {
-                            audio.speak("Maximum temperature is 32 degrees Celsius, please try again.", TextToSpeech.QUEUE_FLUSH, null);
+                            speaker("Maximum temperature is 32 degrees Celsius, please try again.");
                         } else if (temp < 16) {
-                            audio.speak("Minimum temperature is 16 degrees Celsius, please try again.", TextToSpeech.QUEUE_FLUSH, null);
+                            speaker("Minimum temperature is 16 degrees Celsius, please try again.");
                         }
                     } else if (result.contains("set") && result.contains("mode")) {
                         String mode = String.valueOf(results[results.length - 1]);
                         Log.i("Heard you say", mode);
                         if (result.contains("cool")) {
                             displayMode("COOL");
-                            Log.i("it's", "in");
+                            speaker("Mode set to Cool.");
                         } else if (result.contains("vent")) {
                             displayMode("FAN");
+                            speaker("Mode set to Vent.");
                         } else if (result.contains("dry")) {
                             displayMode("DRY");
+                            speaker("Mode set to Dry.");
                         } else if (result.contains("heat") || result.contains("warm")) {
                             displayMode("HEAT");
+                            speaker("Mode set to Heat.");
                         } else if (result.contains("auto") || result.contains("automatic")) {
                             displayMode("AUTO");
+                            speaker("Mode set to Auto.");
                         } else {
-                            audio.speak("Available modes are: COOL, VENT, DRY, HEAT or AUTO. Please try again.", TextToSpeech.QUEUE_FLUSH, null);
+                            speaker("Available modes are: COOL, VENT, DRY, HEAT or AUTO. Please try again.");
                         }
                     } else if (result.contains("meow")) {
-                        audio.speak("Thank you for using our app. OwO", TextToSpeech.QUEUE_FLUSH, null);
+                        speaker("Thank you for using our app. OwO");
                     } else if (result.contains("joke")) {
-                        audio.speak("What’s the difference between a piano and a fish? You can tune a piano, but you can’t tuna fish. HAHA HAHA HAHA", TextToSpeech.QUEUE_FLUSH, null);
+                        speaker("What’s the difference between a piano and a fish? You can tune a piano, but you can’t tuna fish. HAHA HAHA HAHA");
                     }else{
-                        audio.speak("Sorry, please try again", TextToSpeech.QUEUE_FLUSH, null);
+                        speaker("Sorry, please try again");
                     }
                 }
             break;
         }
+    }
+
+    private void speaker(String message){
+        audio.speak(message, TextToSpeech.QUEUE_FLUSH, null);
     }
 
     private void listCommands() {

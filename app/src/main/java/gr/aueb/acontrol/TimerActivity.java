@@ -116,7 +116,7 @@ public class TimerActivity extends AppCompatActivity {
                     feedback = "Start timer disabled.";
                     StartSet = false;
                 }
-                audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
+                speaker(feedback);
             }
         });
 
@@ -136,7 +136,7 @@ public class TimerActivity extends AppCompatActivity {
                     feedback = "Stop timer disabled.";
                     StopSet = false;
                 }
-                audio.speak(feedback, TextToSpeech.QUEUE_FLUSH, null);
+                speaker(feedback);
             }
         });
 
@@ -292,5 +292,9 @@ public class TimerActivity extends AppCompatActivity {
                     }
                 }).create();
         infoBox.show();
+    }
+
+    private void speaker(String message){
+        audio.speak(message, TextToSpeech.QUEUE_FLUSH, null);
     }
 }
