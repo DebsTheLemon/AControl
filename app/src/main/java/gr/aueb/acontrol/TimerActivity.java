@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,8 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 //      setContentView(R.layout.activity_timer);
         createNotificationChannel();
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         currentTime = Calendar.getInstance();
         simple = new SimpleDateFormat("HH:mm");
@@ -164,6 +167,7 @@ public class TimerActivity extends AppCompatActivity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
@@ -172,6 +176,7 @@ public class TimerActivity extends AppCompatActivity {
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 Intent i = new Intent(getApplicationContext(),MoreActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);

@@ -2,9 +2,11 @@ package gr.aueb.acontrol;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -23,6 +25,8 @@ public class MoreActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
+
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         RadioButton turbo, economy;
         turbo = (RadioButton) findViewById(R.id.Turbo);
@@ -54,6 +58,7 @@ public class MoreActivity extends Activity {
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
@@ -63,6 +68,7 @@ public class MoreActivity extends Activity {
         timerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                v.vibrate(50);
                 Intent i = new Intent(getApplicationContext(),TimerActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(i);
@@ -89,16 +95,6 @@ public class MoreActivity extends Activity {
             public void onClick(View view) {
                 showInfoBox("Turbine Modes Info", "Select your desired turbine mode, " +
                         "the current turbine mode is being displayed above the turbine mode buttons.");
-            }
-        });
-
-        infoModes = (ImageView) findViewById(R.id.infoModes);
-        timerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),TimerActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(i);
             }
         });
 

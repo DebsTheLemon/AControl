@@ -38,9 +38,7 @@ public class MainActivity extends Activity {
 
     private static MainActivity instance;
 
-
-
-    ImageView infoTemp, infoMode;
+    ImageView infoTemp, infoMode, btnSpeak;
     RadioButton cool, fan, dry, heat, auto;
     TextToSpeech audio;
     String feedback;
@@ -101,6 +99,7 @@ public class MainActivity extends Activity {
 
         infoTemp = (ImageView) findViewById(R.id.infoTemp);
         infoMode = (ImageView) findViewById(R.id.infoMode);
+        btnSpeak = (ImageView) findViewById(R.id.btnSpeak);
 
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +124,6 @@ public class MainActivity extends Activity {
         infoTemp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                v.vibrate(50);
                showInfoBox("Temperature Info", "Set your desired temperature through " +
                        "the arrow buttons and turn the Air Conditioner ON and OFF with the power button.");
             }
@@ -134,9 +132,16 @@ public class MainActivity extends Activity {
         infoMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                v.vibrate(50);
                 showInfoBox("Modes Info", "Select your desired mode, the current mode " +
                         "is being displayed above the mode buttons.");
+            }
+        });
+
+        btnSpeak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                v.vibrate(50);
+                getSpeechInput();
             }
         });
     }
@@ -223,7 +228,7 @@ public class MainActivity extends Activity {
     }
 
 
-    public void getSpeechInput(View view) {
+    public void getSpeechInput() {
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
