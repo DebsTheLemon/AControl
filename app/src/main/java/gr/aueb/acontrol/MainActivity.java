@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                showInfoBox("Temperature Info", "Set your desired temperature through " +
-                       "the arrow buttons and turn the AC on and off with the power button.");
+                       "the arrow buttons and turn the Air Conditioner ON and OFF with the power button.");
             }
         });
 
@@ -128,7 +128,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view) {
                 showInfoBox("Modes Info", "Select your desired mode, the current mode " +
-                        "is being displayed above the buttons.");
+                        "is being displayed above the mode buttons.");
             }
         });
     }

@@ -88,7 +88,7 @@ public class MoreActivity extends Activity {
             @Override
             public void onClick(View view) {
                 showInfoBox("Turbine Modes Info", "Select your desired turbine mode, " +
-                        "the current turbine mode is being displayed above the buttons.");
+                        "the current turbine mode is being displayed above the turbine mode buttons.");
             }
         });
 
