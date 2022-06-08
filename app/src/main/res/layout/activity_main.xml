@@ -58,14 +58,14 @@
         android:layout_height="wrap_content"
         android:text="Current Temperature: 24°C"
         android:textColor="#FFFFFF"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@+id/PowerBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.125" />
 
     <ImageView
         android:id="@+id/PowerBtn"
@@ -121,26 +121,12 @@
         app:layout_constraintVertical_bias="0.165" />
 
     <TextView
-        android:id="@+id/Celsius"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="°C"
-        android:textColor="#FFFFFF"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.791"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.277" />
-
-    <TextView
         android:id="@+id/celsius"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="°C"
         android:textColor="#FFFFFF"
-        android:textSize="50sp"
+        android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.791"
@@ -343,8 +329,8 @@
         android:src="@drawable/btn_mic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintHorizontal_bias="0.015"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.009" />
+        app:layout_constraintVertical_bias="0.015" />
 </androidx.constraintlayout.widget.ConstraintLayout >
