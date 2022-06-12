@@ -1,7 +1,6 @@
 package gr.aueb.acontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
@@ -21,15 +20,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
-
 import gr.aueb.acontrol.databinding.ActivityTimerBinding;
 
 public class TimerActivity extends AppCompatActivity {
@@ -56,15 +51,19 @@ public class TimerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTimerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//      setContentView(R.layout.activity_timer);
+
+        //Notification channel needed for Timer notifications
         createNotificationChannel();
 
+        //Initiates vibrator for haptic feedback
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+        //Initiate calendar for current time clock
         currentTime = Calendar.getInstance();
         simple = new SimpleDateFormat("HH:mm");
         CurrentTimeVal = (TextView) binding.CurrentTimeVal;
 
+        //Handler to update current time clock value every 5000 milliseconds
         final Handler h = new Handler();
         h.post(new Runnable() {
             @Override
@@ -75,6 +74,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Initiate audio for voice audio feedback
         audio = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -84,6 +84,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Start timer TextView with onClick listener, initiated with current time value
         StartVal = (TextView) binding.StartTimeVal;
         StartVal.setText(String.format(simple.format(currentTime.getTime())));
         StartVal.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +94,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Stop timer TextView with onClick listener, initiated with current time value
         StopVal = (TextView) binding.StopTimeVal;
         StopVal.setText(String.format(simple.format(currentTime.getTime())));
         StopVal.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +104,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Start timer switch
         StartSwitch = (ImageView) findViewById(R.id.StartSwitch);
         binding.StartSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +126,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Stop timer switch
         StopSwitch = (ImageView) findViewById(R.id.StopSwitch);
         StopSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +147,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Start Timer Info Box Button
         infoStart = (ImageView) findViewById(R.id.infoStart);
         infoStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +157,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        //Stop Timer Info Box Button
         infoStop = (ImageView) findViewById(R.id.infoStop);
         infoStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,9 +167,9 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
 
+        // Navigation Bar Buttons
+        // Main Screen Button
         ImageButton homeBtn = (ImageButton) findViewById(R.id.Home);
-        ImageButton moreBtn = (ImageButton) findViewById(R.id.More);
-
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,6 +179,9 @@ public class TimerActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Advanced Screen Button
+        ImageButton moreBtn = (ImageButton) findViewById(R.id.More);
         moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -184,27 +193,25 @@ public class TimerActivity extends AppCompatActivity {
         });
     }
 
-    public void toastMsg(String message) {
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-        toast.show();
-    }
-
+    //Sets start timer alarm with pending Intent
     private void setStartAlarm() {
         startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         startAlarmManager.set(AlarmManager.RTC_WAKEUP, startCalendar.getTimeInMillis(), pendingIntent);
-        Log.i("SET SET", "SET SET");
+        Log.i("Start Timer", "SET");
     }
 
+    //Sets stop timer alarm with pending Intent
     private void setStopAlarm() {
         stopAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE);
         stopAlarmManager.set(AlarmManager.RTC_WAKEUP, stopCalendar.getTimeInMillis(), pendingIntent);
-        Log.i("SET SET", "SET SET");
+        Log.i("Stop Timer", "SET");
     }
 
+    //Cancels start timer alarm
     private void cancelStartAlarm() {
         Intent intent = new Intent(this, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
@@ -212,9 +219,10 @@ public class TimerActivity extends AppCompatActivity {
             startAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         }
         startAlarmManager.cancel(pendingIntent);
-        Log.i("START", "UNSET");
+        Log.i("Start Timer", "UNSET");
     }
 
+    //Cancels stop timer alarm
     private void cancelStopAlarm() {
         Intent intent = new Intent(this, AlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE);
@@ -222,10 +230,10 @@ public class TimerActivity extends AppCompatActivity {
             stopAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         }
         stopAlarmManager.cancel(pendingIntent);
-        Log.i("STOP", "UNSET");
+        Log.i("Stop Timer", "UNSET");
     }
 
-
+    //Displays time picker of start timer
     private void showStartTimePicker() {
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
@@ -236,6 +244,7 @@ public class TimerActivity extends AppCompatActivity {
 
         picker.show(getSupportFragmentManager(), "start");
 
+        //OK button onClick listener updates start timer TextView and start calendar
         picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,6 +257,7 @@ public class TimerActivity extends AppCompatActivity {
         });
     }
 
+    //Displays time picker of stop timer
     private void showStopTimePicker() {
         picker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_24H)
@@ -258,6 +268,7 @@ public class TimerActivity extends AppCompatActivity {
 
         picker.show(getSupportFragmentManager(), "stop");
 
+        //OK button onClick listener updates stop timer TextView and start calendar
         picker.addOnPositiveButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -270,22 +281,37 @@ public class TimerActivity extends AppCompatActivity {
         });
     }
 
+    //Creates Notification channels needed to send the start and stop timer notifications
     private void createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            //Start Timer channel
             NotificationChannel startChannel = new NotificationChannel ("start", "AControl Start Timer", NotificationManager.IMPORTANCE_HIGH);
             startChannel.setDescription("Channel Alarm Manager");
-
+            //Start Timer notification manager
             NotificationManager startManager = getSystemService(NotificationManager.class);
             startManager.createNotificationChannel(startChannel);
 
+            //Stop Timer channel
             NotificationChannel stopChannel = new NotificationChannel ("stop", "AControl Stop Timer", NotificationManager.IMPORTANCE_HIGH);
             startChannel.setDescription("Channel Alarm Manager");
-
+            //Stop Timer notification manager
             NotificationManager stopManager = getSystemService(NotificationManager.class);
             stopManager.createNotificationChannel(stopChannel);
         }
     }
 
+    //Speaker method for voice audio feedback
+    private void speaker(String message){
+        audio.speak(message, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
+    //Creates and displays toast of given message string
+    public void toastMsg(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    //Created and displays infoBox of given title and info strings
     private void showInfoBox(String title, String info){
         AlertDialog infoBox = new AlertDialog.Builder(TimerActivity.this)
                 .setTitle(title)
@@ -299,7 +325,4 @@ public class TimerActivity extends AppCompatActivity {
         infoBox.show();
     }
 
-    private void speaker(String message){
-        audio.speak(message, TextToSpeech.QUEUE_FLUSH, null);
-    }
 }

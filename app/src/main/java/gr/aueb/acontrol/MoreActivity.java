@@ -18,30 +18,55 @@ import android.widget.Toast;
 public class MoreActivity extends Activity {
     CompoundButton previousCheckedCompoundButton;
     ImageView swingSwitch, infoSwing, infoFan, infoModes;
+    RadioButton turbo, economy;
     int speed = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
 
+        //Initiate Vibrator for haptic feedback
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-        RadioButton turbo, economy;
+        // Turbine Mode Image Radio Buttons
+        //Turbo Mode Button
         turbo = (RadioButton) findViewById(R.id.Turbo);
-        economy = (RadioButton) findViewById(R.id.Economy);
-
         turbo.setOnCheckedChangeListener(onRadioButtonCheckedListener);
+        //Eco Mode Button
+        economy = (RadioButton) findViewById(R.id.Economy);
         economy.setOnCheckedChangeListener(onRadioButtonCheckedListener);
 
-        ImageButton homeBtn = (ImageButton) findViewById(R.id.Home);
-        ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
-
+        //Swing Menu Info Box Button
         infoSwing = (ImageView) findViewById(R.id.infoSwing);
-        infoFan = (ImageView) findViewById(R.id.infoFan);
-        infoModes = (ImageView) findViewById(R.id.infoModes);
+        infoSwing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Swing Adjustment", "To adjust the air's direction press START, " +
+                        "when the flap has reached your desired angle, press STOP.");
+            }
+        });
 
+        //Fan Speed Menu Info Box Button
+        infoFan = (ImageView) findViewById(R.id.infoFan);
+        infoFan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Fan Speed Controls", "Use the arrow buttons to adjust the fan Speed between 1-3.");
+            }
+        });
+
+        //Turbine Mode Menu Info Box Button
+        infoModes = (ImageView) findViewById(R.id.infoModes);
+        infoModes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showInfoBox("Turbine Modes Info", "Select your desired turbine mode, " +
+                        "the current turbine mode is being displayed above the turbine mode buttons.");
+            }
+        });
+
+        //Swing switch button
         swingSwitch = (ImageView) findViewById(R.id.SwingSwitch);
         swingSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +80,9 @@ public class MoreActivity extends Activity {
             }
         });
 
+        // Navigation Bar Buttons
+        //Main Screen Button
+        ImageButton homeBtn = (ImageButton) findViewById(R.id.Home);
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +93,8 @@ public class MoreActivity extends Activity {
             }
         });
 
+        //Timer Screen Button
+        ImageButton timerBtn = (ImageButton) findViewById(R.id.Timer);
         timerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,49 +105,9 @@ public class MoreActivity extends Activity {
             }
         });
 
-        infoSwing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showInfoBox("Swing Adjustment", "To adjust the air's direction press START, " +
-                        "when the flap has reached your desired angle, press STOP.");
-            }
-        });
-
-        infoFan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showInfoBox("Fan Speed Controls", "Use the arrow buttons to adjust the fan Speed between 1-3.");
-            }
-        });
-
-        infoModes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showInfoBox("Turbine Modes Info", "Select your desired turbine mode, " +
-                        "the current turbine mode is being displayed above the turbine mode buttons.");
-            }
-        });
-
     }
 
-    public void toastMsg(String message) {
-        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
-        toast.show();
-    }
-
-    private void showInfoBox(String title, String info){
-        AlertDialog infoBox = new AlertDialog.Builder(MoreActivity.this)
-                .setTitle(title)
-                .setMessage(info)
-                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface infoBox, int i) {
-                        infoBox.dismiss();
-                    }
-                }).create();
-        infoBox.show();
-    }
-
+    //Used for functional image radio buttons in turbine mode selection
     CompoundButton.OnCheckedChangeListener onRadioButtonCheckedListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -131,6 +121,7 @@ public class MoreActivity extends Activity {
         }
     };
 
+    //OnClick methods of each button
     public void modeCool(View view){
         displayMode("TURBO");
     }
@@ -138,10 +129,33 @@ public class MoreActivity extends Activity {
         displayMode("ECO");
     }
 
+    //Creates and displays toast of given message string
+    public void toastMsg(String message) {
+        Toast toast = Toast.makeText(this, message, Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+    //Created and displays infoBox of given title and info strings
+    private void showInfoBox(String title, String info){
+        AlertDialog infoBox = new AlertDialog.Builder(MoreActivity.this)
+                .setTitle(title)
+                .setMessage(info)
+                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface infoBox, int i) {
+                        infoBox.dismiss();
+                    }
+                }).create();
+        infoBox.show();
+    }
+
+    //Updates current turbine mode TextView
     private void displayMode(String mode) {
         TextView Mode = (TextView) findViewById(R.id.CurrentTurbineVal);
         Mode.setText("" + mode);
     }
+
+    //OnClick method of fan speed increase button
     public void increaseSpeed(View view) {
         if (speed < 3) {
             speed = speed + 1;
@@ -149,6 +163,7 @@ public class MoreActivity extends Activity {
         displaySpeed(speed);
     }
 
+    //OnClick method of fan speed decrease button
     public void decreaseSpeed(View view) {
         if (speed > 1) {
             speed = speed - 1;
@@ -156,6 +171,7 @@ public class MoreActivity extends Activity {
         displaySpeed(speed);
     }
 
+    //Updates current fan speed TextView
     private void displaySpeed(int speed) {
         TextView displayInteger = (TextView) findViewById (R.id.TxtCurrentFanVal);
         displayInteger.setText("" + speed);
