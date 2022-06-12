@@ -38,8 +38,6 @@ public class MainActivity extends Activity {
     String feedback;
     static ImageView power;
 
-    //private TextView txvResult;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
