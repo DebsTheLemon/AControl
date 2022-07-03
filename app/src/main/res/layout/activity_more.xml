@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@drawable/selector_turbo_mode"
-            android:onClick="modeCool" />
+            android:onClick="modeTurbo" />
 
         <RadioButton
             android:id="@+id/Economy"
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@drawable/selector_eco_mode"
-            android:onClick="modeFan" />
+            android:onClick="modeEco" />
 
     </RadioGroup>
 

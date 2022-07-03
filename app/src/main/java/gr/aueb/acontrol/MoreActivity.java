@@ -122,10 +122,8 @@ public class MoreActivity extends Activity {
     };
 
     //OnClick methods of each button
-    public void modeCool(View view){
-        displayMode("TURBO");
-    }
-    public void modeFan(View view){
+    public void modeTurbo(View view){ displayMode("TURBO"); }
+    public void modeEco(View view){
         displayMode("ECO");
     }
 
