@@ -269,7 +269,7 @@ public class MainActivity extends Activity {
                         powerON();
                     } else if (result.contains("turn") && result.contains("off")) {
                         powerOFF();
-                    } else if (result.contains("Celsius")) {
+                    } else if (result.contains("celsius")) {
                         Log.i("Desired Temperature", String.valueOf(results[results.length - 2]));
                         temp = Integer.valueOf(results[results.length - 2]);
                         if (temp <= 32 && temp >= 16) {
