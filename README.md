@@ -48,6 +48,11 @@ As the name indicates, this screen has a start and stop timer for the AC. Each t
 ### Start Timer
 Once the start timer is set a pending intent is created. At the selected time, the AC "turns on" and a notification is sent to the user informing them of the change. The timer is then automatically unset. If the timer is unset before the event of the selected time, the pending intent gets destroyed. 
 
-### Start Timer
+### Stop Timer
 Once the stop timer is set a pending intent is created. At the selected time, the AC "turns off" and a notification is sent to the user informing them of the change. The timer is then automatically unset. If the timer is unset before the event of the selected time, the pending intent gets destroyed. 
+
+# Tools Used
+The elements of the app were all created from scratch in Figma, an online mockup and vector graphics tool. Two versions were created for each button, a pressed state and an unpressed state. Through this difference in appearance we hoped to achieve additional visual feedback to the user since the selected mode/state is always visible through each button's look.
+
+The app and the entirety of its functionality was implemented in Android Studio using Java.
 
