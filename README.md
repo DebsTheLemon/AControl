@@ -41,3 +41,13 @@ The user can choose their desired fan speed.
 The user can pick one of 2 turbine modes. Those are the following:
 - Economy
 - Turbo
+
+## Timer Screen
+As the name indicates, this screen has a start and stop timer for the AC. Each timer changes the state of the AC's power button accordingly and sends a notification when said change takes place.
+
+### Start Timer
+Once the start timer is set a pending intent is created. At the selected time, the AC "turns on" and a notification is sent to the user informing them of the change. The timer is then automatically unset. If the timer is unset before the event of the selected time, the pending intent gets destroyed. 
+
+### Start Timer
+Once the stop timer is set a pending intent is created. At the selected time, the AC "turns off" and a notification is sent to the user informing them of the change. The timer is then automatically unset. If the timer is unset before the event of the selected time, the pending intent gets destroyed. 
+
