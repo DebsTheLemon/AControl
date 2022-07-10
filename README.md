@@ -54,9 +54,5 @@ Once the stop timer is set a pending intent is created. At the selected time, th
 # Tools Used
 The elements of the app were all created from scratch in Figma, an online mockup and vector graphics tool. Two versions were created for each button, a pressed state and an unpressed state. Through this difference in appearance we hoped to achieve additional visual feedback to the user since the selected mode/state is always visible through each button's look.
 
-The app and the entirety of its functionality was implemented in Android Studio (Android API 32) using Java.
-
-Our voice control functionality uses android's SpeechRecognizer for speech recognition.
-
-The audio feedback is provided by using android's TextToSpeech which synthesizes speech from text.
+The app and the entirety of its functionality was implemented in Android Studio (Android API 32) using Java. Our voice control functionality uses android's SpeechRecognizer for speech recognition. The audio feedback is provided by using android's TextToSpeech which synthesizes speech from text.
 
